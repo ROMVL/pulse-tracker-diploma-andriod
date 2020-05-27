@@ -11,6 +11,9 @@ interface UserApi {
     @GET("/login/{email}")
     suspend fun signIn(@Path("email") email: String): UserDataModel
 
+    @GET("/get/{email}")
+    suspend fun getUserProfile(@Path("email") email: String): UserDataModel
+
     @POST("/add")
     suspend fun signUp(@Body userDataModel: UserDataModel): UserDataModel
 
