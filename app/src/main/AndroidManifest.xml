@@ -5,7 +5,6 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-
     <application
         android:name=".PulseApp"
         android:icon="@mipmap/ic_launcher"
@@ -14,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning,LockedOrientationActivity">
-        <activity android:name=".presentation.screen.activity.AuthActivity"
+        <activity android:name=".presentation.screen.activity.SplashScreenActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -23,9 +22,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.screen.activity.MainActivity"
+        <activity
+            android:name=".presentation.screen.activity.AuthActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".presentation.screen.activity.MainActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
