@@ -57,7 +57,7 @@ dependencies {
     testImplementation "org.koin:koin-test:$koin_version"
 
     //Network
-    def retrofit_version = '2.6.1'
+    def retrofit_version = '2.8.1'
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
     implementation "com.google.code.gson:gson:2.8.6"
@@ -74,5 +74,9 @@ dependencies {
     implementation "ru.ldralighieri.corbind:corbind-core:$corbind_version"
     implementation "ru.ldralighieri.corbind:corbind-appcompat:$corbind_version"
     implementation "ru.ldralighieri.corbind:corbind-material:$corbind_version"
+
+    implementation 'com.github.lecho:hellocharts-library:1.5.8@aar'
+
+    implementation 'net.danlew:android.joda:2.10.1'
 
 }

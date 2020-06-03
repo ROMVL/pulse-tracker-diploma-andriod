@@ -6,13 +6,15 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import ua.romanik.pulse.BuildConfig
+import ua.romanik.pulse.data.network.api.PulseApi
 import ua.romanik.pulse.data.network.api.UserApi
 import java.util.concurrent.TimeUnit
 
 val networkModule = module {
     single { providesHttpClient() }
     single { provideRetrofit(get()) }
-    single { get<Retrofit>().create(UserApi::class.java) }
+    single<UserApi> { get<Retrofit>().create(UserApi::class.java) }
+    single<PulseApi> { get<Retrofit>().create(PulseApi::class.java) }
 }
 
 fun providesHttpClient(): OkHttpClient {
