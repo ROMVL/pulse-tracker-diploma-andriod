@@ -21,8 +21,10 @@ abstract class BaseFragment(@LayoutRes layout: Int) : Fragment(layout) {
     }
 
     protected fun handleError(throwable: Throwable) {
-        throwable.localizedMessage?.let {
-            Snackbar.make(requireView(), it, Snackbar.LENGTH_LONG).show()
+        throwable.localizedMessage?.let { error ->
+            view?.let { currentView ->
+                Snackbar.make(currentView, error, Snackbar.LENGTH_LONG).show()
+            }
         }
     }
 

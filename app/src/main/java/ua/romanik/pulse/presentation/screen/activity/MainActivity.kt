@@ -2,7 +2,6 @@ package ua.romanik.pulse.presentation.screen.activity
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
@@ -37,38 +36,29 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         bottomNavView.setupWithNavController(findNavController(R.id.navigation_main))
-        startGenerationPulse {
-            Random.nextInt(75, 90).toString()
-        }
-
-        startGenerationPulse(180000) {
-            Random.nextInt(110, 170).toString()
-        }
-
-        startGenerationPulse(120000) {
-            Random.nextInt(30, 50).toString()
-        }
+        startGenerationData()
     }
 
     override fun onNavigateUp(): Boolean = findNavController(R.id.navigation_main).navigateUp()
 
-    private fun startGenerationPulse(
-        delay: Long = 500,
-        pulse: () -> String
-    ) {
+    private fun startGenerationData() {
         lifecycleScope.launch {
-            withContext(Dispatchers.IO) {
-                val email = userRepository.fetchAuthUserData()
-                while (true) {
-                    pulseApi.setPulse(
-                        PulseRequestModel(
-                            email,
-                            pulse.invoke()
-                        )
-                    )
-                    delay(delay)
+            val email = userRepository.fetchAuthUserData()
+            while (true) {
+                generateData().forEach {
+                    pulseApi.setPulse(PulseRequestModel(email, it))
+                    delay(500)
                 }
             }
+        }
+    }
+
+    private suspend fun generateData(): List<String> = withContext(Dispatchers.Default) {
+        return@withContext mutableListOf<String>().apply {
+            addAll(List(40) { Random.nextInt(75, 90).toString() })
+            addAll(List(20) { Random.nextInt(130, 170).toString() })
+            addAll(List(50) { Random.nextInt(75, 90).toString() })
+            addAll(List(20) { Random.nextInt(10, 50).toString() })
         }
     }
 

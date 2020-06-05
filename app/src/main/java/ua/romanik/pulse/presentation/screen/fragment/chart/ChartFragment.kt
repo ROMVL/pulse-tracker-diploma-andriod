@@ -27,9 +27,7 @@ class ChartFragment : BaseFragment(R.layout.fragment_chart) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        charts?.setContainerScrollEnabled(true, ContainerScrollType.HORIZONTAL)
-        charts?.setInteractive(true)
-        charts?.zoomType = ZoomType.HORIZONTAL_AND_VERTICAL
+        charts?.isInteractive = false
         fetchPulse()
     }
 
@@ -38,20 +36,24 @@ class ChartFragment : BaseFragment(R.layout.fragment_chart) {
             withContext(Dispatchers.IO) {
                 while (true) {
                     runCatching {
-                        pulseApi.getPulse(userRepository.fetchAuthUserData())
+                        pulseApi.getPulse(userRepository.fetchAuthUserData()).takeLast(15)
                     }.onSuccess {
-                        displayCharts(it)
+                        formatChartData(it).let {
+                            withContext(Dispatchers.Main) {
+                                charts?.lineChartData = it
+                            }
+                        }
                     }.onFailure {
                         handleError(it)
                     }
-                    delay(2500)
+                    delay(2000)
                 }
             }
         }
     }
 
-    private suspend fun displayCharts(data: List<PulseDataModel>?) = withContext(Dispatchers.Main) {
-        data?.let {
+    private suspend fun formatChartData(data: List<PulseDataModel>): LineChartData = withContext(Dispatchers.Default) {
+        return@withContext data.let {
             val yAxisValues = ArrayList<PointValue>()
             val axisValues = ArrayList<AxisValue>()
             val line = Line(yAxisValues)
@@ -70,25 +72,30 @@ class ChartFragment : BaseFragment(R.layout.fragment_chart) {
 
             val lines = ArrayList<Line>()
             lines.add(line)
+            lines.add(
+                Line(
+                    listOf(
+                        PointValue(0F, 0F),
+                        PointValue( 1F, 170F)
+                    )
+                ).apply { color = ContextCompat.getColor(requireContext(), R.color.colorTransparent) }
+            )
 
-            val data = LineChartData()
-            data.lines = lines
+            val chartData = LineChartData()
+            chartData.lines = lines
+            chartData.axisYLeft = Axis.generateAxisFromRange(0F, 170F, 10F).apply {
+                textColor = ContextCompat.getColor(requireContext(), R.color.colorText)
+                textSize = 10
+                setHasLines(true)
+            }
 
             val axis = Axis()
             axis.values = axisValues
-            axis.textSize = 7
+            axis.textSize = 10
             axis.textColor = ContextCompat.getColor(requireContext(), R.color.colorText)
-            data.axisXBottom = axis
-
-            val yAxis = Axis()
-            yAxis.textSize = 10
-            yAxis.setHasLines(true)
-            yAxis.textColor = ContextCompat.getColor(requireContext(), R.color.colorText)
-            data.axisYLeft = yAxis
-
-            charts?.startDataAnimation()
-            charts?.lineChartData = data
-
+            chartData.apply {
+                axisXBottom = axis
+            }
         }
     }
 
