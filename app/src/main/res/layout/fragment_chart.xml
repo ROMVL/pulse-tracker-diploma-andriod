@@ -3,18 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackground"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".presentation.screen.fragment.chart.ChartFragment">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:cardBackgroundColor="@color/colorBackgroundSecondary"
         android:layout_margin="12dp"
         app:cardCornerRadius="7dp">
 
         <lecho.lib.hellocharts.view.LineChartView
             android:id="@+id/charts"
-            android:layout_margin="4dp"
+            android:layout_margin="12dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

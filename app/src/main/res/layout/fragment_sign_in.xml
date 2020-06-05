@@ -6,15 +6,17 @@
     android:gravity="center"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="@android:color/white"
+    android:background="@color/colorBackground"
     android:divider="@android:color/white"
     android:dividerPadding="4dp"
     tools:context=".presentation.screen.fragment.signin.SignInFragment">
 
 
     <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/email"
@@ -23,14 +25,15 @@
             android:hint="@string/email" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonSignIn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:enabled="false"
         android:text="@string/sign_in" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
+        style="@style/MaterialButtonSecondary"
         android:id="@+id/buttonSignUp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
