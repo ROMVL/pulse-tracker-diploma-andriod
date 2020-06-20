@@ -55,7 +55,7 @@ class MainActivity : BaseActivity() {
 
     private suspend fun generateData(): List<String> = withContext(Dispatchers.Default) {
         return@withContext mutableListOf<String>().apply {
-            //addAll(List(40) { Random.nextInt(75, 90).toString() })
+            addAll(List(40) { Random.nextInt(75, 90).toString() })
             addAll(List(20) { Random.nextInt(130, 170).toString() })
             addAll(List(50) { Random.nextInt(75, 90).toString() })
             addAll(List(20) { Random.nextInt(10, 50).toString() })
