@@ -1,6 +1,7 @@
 package ua.romanik.pulse.presentation.screen.fragment.base
 
 import android.content.Intent
+import android.util.Log
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import androidx.navigation.ActivityNavigator
@@ -21,6 +22,7 @@ abstract class BaseFragment(@LayoutRes layout: Int) : Fragment(layout) {
     }
 
     protected fun handleError(throwable: Throwable) {
+        Log.e("ErrorPulseApp", throwable.localizedMessage)
         throwable.localizedMessage?.let { error ->
             view?.let { currentView ->
                 Snackbar.make(currentView, error, Snackbar.LENGTH_LONG).show()
