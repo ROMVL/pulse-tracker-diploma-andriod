@@ -15,5 +15,10 @@
         android:name="ua.romanik.pulse.presentation.screen.fragment.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/hintsFragment"
+        android:name="ua.romanik.pulse.presentation.screen.fragment.hints.HintsFragment"
+        android:label="fragment_hints"
+        tools:layout="@layout/fragment_hints" />
 
 </navigation>

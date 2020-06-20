@@ -15,4 +15,8 @@
     <string name="charts">Charts</string>
     <string name="profile">Profile</string>
     <string name="edit">edit</string>
+    <string name="hints">Hints</string>
+    <string name="sport">Do sports!</string>
+    <string name="rest">Take a rest!</string>
+    <string name="things_are_good">Things are good!</string>
 </resources>

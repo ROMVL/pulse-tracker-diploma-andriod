@@ -7,6 +7,11 @@
         android:icon="@drawable/ic_multiline_chart_black"/>
 
     <item
+        android:id="@+id/hintsFragment"
+        android:title="@string/hints"
+        android:icon="@drawable/ic_multiline_chart_black"/>
+
+    <item
         android:id="@+id/profileFragment"
         android:title="@string/profile"
         android:icon="@drawable/ic_account_circle"/>
